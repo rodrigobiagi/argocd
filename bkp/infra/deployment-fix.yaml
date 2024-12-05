@@ -1,22 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-backoffice-admin-api
+  name: deploy-fix-wkr-processador-ap
   namespace: #{namespace}#
 spec:
   replicas: #{replicas}#
   selector:
     matchLabels:
-      app: backoffice-admin-api
+      app: fix-wkr-processador-ap
   template:
     metadata:
       labels:
-        app: backoffice-admin-api
+        app: fix-wkr-processador-ap
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: company
+                operator: In
+                values:
+                - tecnobank
       containers:
-      - name:  backoffice-admin-api-container
+      - name:  fix-wkr-processador-ap-container
         image: #{image}#:#{imageName}#
-        resources:
+        resources: 
           requests:
             cpu: #{cpu}#
             memory: #{memory}#
@@ -35,40 +44,27 @@ spec:
       volumes:
         - name: config-appsettings
           configMap:
-            name: backoffice-admin-api-appsettings
+            name: wkr-processador-ap-appsettings
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-backoffice-admin-api
+  name: service-fix-wkr-processador-ap
   namespace: #{namespace}#
 spec:
   type: ClusterIP
   ports:
   - port: 80
   selector:
-    app: backoffice-admin-api
+    app: fix-wkr-processador-ap
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+data:
+  tls.crt: #{tlscert}#
+  tls.key: #{tlskey}#
+kind: Secret
 metadata:
-  name: ingress-backoffice-admin-api
+  name: tls-tecnobank
   namespace: #{namespace}#
-  annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
-spec:
-  rules:
-  - host: #{rota}#.2ef396cff58c48d2b094.eastus2.aksapp.io
-    http:
-      paths:
-      - backend:
-          service:
-            name: service-backoffice-admin-api
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - #{rota}#.2ef396cff58c48d2b094.eastus2.aksapp.io
-    secretName: tls-tecnobank
+type: kubernetes.io/tls
+

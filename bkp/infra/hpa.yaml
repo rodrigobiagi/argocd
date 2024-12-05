@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpa-backoffice-admin-api
+  name: hpa-wkr-processador-ap
   namespace: #{namespace}#
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: deploy-backoffice-admin-api
+    name: deploy-wkr-processador-ap
   minReplicas: #{min-replicas}#
   maxReplicas: #{max-replicas}#
   metrics:
@@ -30,3 +30,4 @@ spec:
       - type: Pods
         value: 1
         periodSeconds: 60
+      selectPolicy: Min
