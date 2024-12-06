@@ -7,8 +7,6 @@ metadata:
   namespace: elysium
 spec:
   replicas: 5
-  min-replicas: 2
-  max-replicas: 10
   selector:
     matchLabels:
       app: nginx-app
