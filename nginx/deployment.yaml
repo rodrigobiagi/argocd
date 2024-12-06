@@ -16,6 +16,11 @@ spec:
       labels:
         app: nginx-deployment
     spec:
+      tolerations:
+      - key: uso
+        value: monitoramento
+        operator: Equal
+        effect: NoSchedule
       containers:
       - image: nginx:1.19.1
         name: nginx
