@@ -18,7 +18,7 @@ spec:
     spec:
       tolerations:
       - key: uso
-        value: interno
+        value: Interno
         operator: Equal
         effect: NoSchedule
       containers:
