@@ -18,11 +18,11 @@ spec:
     spec:
       tolerations:
       - key: uso
-        value: monitoramento
+        value: interno
         operator: Equal
         effect: NoSchedule
       containers:
-      - image: nginx:1.19.1
+      - image: public.ecr.aws/nginx/nginx:1.19.1
         name: nginx
         resources:
           limits:
