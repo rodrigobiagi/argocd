@@ -22,7 +22,7 @@ spec:
         operator: Equal
         effect: NoSchedule
       containers:
-      - image: public.ecr.aws/nginx/nginx:1.19.1
+      - image: public.ecr.aws/nginx/nginx:1.27.3
         name: nginx
         resources:
           limits:
