@@ -19,4 +19,4 @@ spec:
   tls:
   - hosts:
     - nginx-argo.dev.aws.cloud.ihf
-    secretName: tls-tecnobank
+    secretName: itau-ca-bundle
