@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+  namespace: elysium
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx-argo.dev.aws.cloud.ihf
+    http:
+      paths:
+      - backend:
+          service:
+            name: service-nginx
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - nginx-argo.dev.aws.cloud.ihf
+    secretName: tls-tecnobank

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx-deployment
+    app: nginx-app
   name: nginx-deployment
   namespace: elysium
 spec:
@@ -11,12 +11,12 @@ spec:
   max-replicas: 10
   selector:
     matchLabels:
-      app: nginx-deployment
+      app: nginx-app
   strategy: {}
   template:
     metadata:
       labels:
-        app: nginx-deployment
+        app: nginx-app
     spec:
       tolerations:
       - key: uso
